@@ -2,6 +2,7 @@ package com.example.User.controller;
 
 import com.example.User.models.Address;
 import com.example.User.service.AddressService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,7 +18,7 @@ public class AddressController {
         return  service.getAllAddress();
     }
     @PostMapping
-    public String save(@RequestBody Address address){
+    public String save(@Valid @RequestBody Address address){
         return  service.insertAddress(address);
     }
     @DeleteMapping("/{id}")

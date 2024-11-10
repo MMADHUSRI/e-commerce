@@ -2,6 +2,7 @@ package com.example.User.controller;
 
 import com.example.User.models.Orders;
 import com.example.User.service.OrdersService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,7 +18,7 @@ public class OrdersController {
         return service.getAllOrders();
     }
     @PostMapping
-    public String save(@RequestBody Orders orders){
+    public String save( @Valid @RequestBody Orders orders){
         return  service.insertOrders(orders);
     }
     @DeleteMapping("/{id}")

@@ -4,16 +4,25 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Past;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Set;
-
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 public class CartItem {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+    @NotNull(message = "CreateOn date is mandatory")
+    @Past(message =  "CreateOn date is must be past")
     private LocalDate createOn;
   @ManyToOne
   @JoinColumn(name = "product_id",referencedColumnName = "id")
@@ -24,35 +33,4 @@ public class CartItem {
  @JsonBackReference(value = "cartItem-cart")
     private Cart cart;
 
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    public LocalDate getCreateOn() {
-        return createOn;
-    }
-
-    public void setCreateOn(LocalDate createOn) {
-        this.createOn = createOn;
-    }
-
-    public Product getProduct() {
-        return product;
-    }
-
-    public void setProduct(Product product) {
-        this.product = product;
-    }
-
-    public Cart getCart() {
-        return cart;
-    }
-
-    public void setCart(Cart cart) {
-        this.cart = cart;
-    }
 }

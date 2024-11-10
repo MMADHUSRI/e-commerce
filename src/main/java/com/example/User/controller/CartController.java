@@ -2,6 +2,7 @@ package com.example.User.controller;
 
 import com.example.User.models.Cart;
 import com.example.User.service.CartService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,7 +18,7 @@ public class CartController {
         return service.getAllCart();
     }
     @PostMapping
-    public String save(@RequestBody Cart cart){
+    public String save(@Valid @RequestBody Cart cart){
         return  service.insertCart(cart);
 
     }

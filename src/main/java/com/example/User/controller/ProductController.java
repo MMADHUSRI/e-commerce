@@ -2,6 +2,7 @@ package com.example.User.controller;
 
 import com.example.User.models.Product;
 import com.example.User.service.ProductService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,7 +18,7 @@ public class ProductController {
         return service.getAllProduct();
     }
     @PostMapping
-    public String save(@RequestBody Product product){
+    public String save(@Valid @RequestBody Product product){
         return  service.insertProduct(product);
 
     }

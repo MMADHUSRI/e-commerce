@@ -20,11 +20,25 @@ public class UserService {
             if (user1.getEmail().equals(user.getEmail())) {
                 return "User email already registered.";
             }
+
         }
 
         repository.save(user);
         return "user Saved";
 
+
+    }
+    public  String logIn(User user){
+        List<User> logIn = repository.findAll();
+        for(User user2:logIn){
+            if(user2.getEmail().equals(user.getEmail())) {
+                if (user2.getPassword().equals(user.getPassword())) {
+                   return "logIn";
+                }
+                return "User password is Incorrect";
+            }
+        }
+        return "email mismatch...";
     }
     public String deleteUser(long id){
         repository.deleteById(id);

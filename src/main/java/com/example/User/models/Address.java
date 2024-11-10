@@ -3,20 +3,41 @@ package com.example.User.models;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Past;
+import jakarta.validation.constraints.Size;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
 import java.util.Set;
-
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 public class Address {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private  long id;
+    @NotBlank(message = "No is mandatory")
+    @Size(min = 1,max = 5,message = "No must be between 1 to 5")
     private  String no;
+    @NotBlank(message = "Street is mandatory")
+    @Size(min = 2,max = 30,message = "Street name must be between 2 to 30")
     private  String street;
+    @NotBlank(message = "City is mandatory")
+    @Size(min = 2,max = 15,message = "City name must be between 2 to 15")
     private String city;
+    @NotBlank(message = "State is mandatory")
+    @Size(min = 2,max = 10,message = "State name must be between 2 to 10")
     private String state;
+    @NotBlank(message = "Country is mandatory")
+    @Size(min = 2,max = 10,message = "Country name must be between 2 to 10")
     private String country;
+    @NotNull(message = "Create date is mandatory")
+    @Past(message = "Created date is must be past date")
     private LocalDate createOn;
     private Type type;
     @ManyToOne
@@ -32,83 +53,5 @@ public class Address {
     )
     @JsonIgnoreProperties("address")
     private Set<Orders> orders;
-    public long getId() {
-        return id;
-    }
 
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    public String getNo() {
-        return no;
-    }
-
-    public void setNo(String no) {
-        this.no = no;
-    }
-
-    public String getStreet() {
-        return street;
-    }
-
-    public void setStreet(String street) {
-        this.street = street;
-    }
-
-    public String getCity() {
-        return city;
-    }
-
-    public void setCity(String city) {
-        this.city = city;
-    }
-
-    public String getState() {
-        return state;
-    }
-
-    public void setState(String state) {
-        this.state = state;
-    }
-
-    public String getCountry() {
-        return country;
-    }
-
-    public void setCountry(String country) {
-        this.country = country;
-    }
-
-    public LocalDate getCreateOn() {
-        return createOn;
-    }
-
-    public void setCreateOn(LocalDate createOn) {
-        this.createOn = createOn;
-    }
-
-    public Type getType() {
-        return type;
-    }
-
-    public void setType(Type type) {
-        this.type = type;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
-
-    public Set<Orders> getOrders() {
-        return orders;
-    }
-
-    public void setOrders(Set<Orders> orders) {
-        this.orders = orders;
-    }
 }

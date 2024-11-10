@@ -2,6 +2,7 @@ package com.example.User.controller;
 
 import com.example.User.models.Category;
 import com.example.User.service.CategoryService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,7 +18,7 @@ public class CategoryController {
         return service.getAllCategory();
     }
     @PostMapping
-    public String save(@RequestBody Category category){
+    public String save(@Valid @RequestBody Category category){
         return  service.insertCategory(category);
     }
     @DeleteMapping("/{id}")
